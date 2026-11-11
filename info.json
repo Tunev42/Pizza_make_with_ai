@@ -1,0 +1,74 @@
+{
+    "admin@tatsumaki.xyz": {
+        "name": "Администратор",
+        "age": 21,
+        "phone": "79999999999",
+        "password": "admin"
+    },
+    "kostik@gmail.com": {
+        "name": "Кост",
+        "age": 19,
+        "phone": "79056789327",
+        "password": "676767676"
+    },
+    "jet@gmail.com": {
+        "name": "Кеокропк",
+        "age": 19,
+        "phone": "79054567899",
+        "password": "67676767"
+    },
+    "kost@gmail.com": {
+        "name": "Jjheg",
+        "age": 19,
+        "phone": "79832170281",
+        "password": "67676767"
+    },
+    "asdfsf2@gmail.com": {
+        "name": "Jrfjhdfh",
+        "age": 19,
+        "phone": "78654325467",
+        "password": "k17tyh"
+    },
+    "kty@gmail.com": {
+        "name": "Tyhg",
+        "age": 20,
+        "phone": "77654198567",
+        "password": "kjdhjkdjfhkd"
+    },
+    "jsgj@gmail.com": {
+        "name": "Rtyg",
+        "age": 20,
+        "phone": "76549327565",
+        "password": "k6754"
+    },
+    "jdjgs@gmail.com": {
+        "name": "Ldfgd",
+        "age": 20,
+        "phone": "75437896756",
+        "password": "675j7j5"
+    },
+    "kdfh@gmail.com": {
+        "name": "Rehdf",
+        "age": 20,
+        "phone": "78564362581",
+        "password": "567567tg"
+    },
+    "sdjghjkhsd@gmail.com": {
+        "name": "Dfhdh",
+        "age": 20,
+        "phone": "74568679090",
+        "password": "ljsdkgsd"
+    },
+    "kisdgjh@gmail.com": {
+        "name": "Dfy",
+        "age": 20,
+        "phone": "74567890029",
+        "password": "547478"
+    },
+    "dfhdfh@gmail.com": {
+        "name": "Sdhf",
+        "age": 20,
+        "phone": "75645789900",
+        "password": "4856456"
+    }
+}
