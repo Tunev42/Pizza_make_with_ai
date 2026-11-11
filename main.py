@@ -522,6 +522,8 @@ def open_cart(menu, cart, age, balance, bonus):
     elif payment_choice == 3:
         balance = balance - final_price
         tools.fade_print(f"С вашего кошелька списалось {final_price}, Баланс: {int(balance)}", white_tag=True, time_show=3, color="b5b5b5")
+        i = []
+        cart = i
         return main_menu(menu, cart, age, balance, bonus)
 
 
@@ -569,7 +571,7 @@ def open_cash(menu, cart, age, balance, bonus):
 def add_value(menu, cart, age, balance, bonus):
     try:
         while True:
-            num = int(input())
+            num = int(input("Введите сколько вы хотите внести денег: "))
             if num > 0 and num < 999999999999999:
                 balance += num
                 break
