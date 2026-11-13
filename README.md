@@ -1,12 +1,6 @@
 <img src="https://github.com/SayGGGo/Tatsumaki/raw/main/for_readme/main.png" alt="Tatsimaki">
 <hr>
 
-> **Инфо** Проект находится в alpha тесте. Если вы наткнулись на баг - пожалуйста, 
-> свяжитесь со мной [тут](https://t.me/SayGG_Go).
-
-> **Инфо** Данный проект создан как итоговый для учебного заведения. Я не собираюсь 
-> использовать его в продакшен.
-
 <h2>Содержание</h2>
 
 <ul>
@@ -67,13 +61,6 @@ python main.py
 <img src="https://github.com/SayGGGo/Tatsumaki/raw/main/for_readme/demo.png" alt="DEMO">
 
 <hr>
-<a name="demo"></a>
-<h2>Демонстрация</h2>
-
-<img src="https://github.com/SayGGGo/Tatsumaki/raw/main/for_readme/first_demo.png" alt="Screen 1">
-<img src="https://github.com/SayGGGo/Tatsumaki/raw/main/for_readme/soon.png" alt="Screen 2">
-<img src="https://github.com/SayGGGo/Tatsumaki/raw/main/for_readme/soon.png" alt="Screen 3">
-
 <br><br><br>
 
 <img src="https://github.com/SayGGGo/Tatsumaki/raw/main/for_readme/credits.png" alt="CREDITS">
