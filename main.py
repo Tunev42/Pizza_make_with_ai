@@ -1,4 +1,4 @@
-# --- Импорты ---
+# Импорты
 import time
 import math
 from datetime import datetime
@@ -164,7 +164,6 @@ def get_rating(dish_name, price, menu_data):
 
 def preload_ratings(menu):
     tools.fade_print("парсим рейтинги, подожди", white_tag=True, time_show=0.01, color="b5b5b5")
-    # TODO: потом сделать прогресс бар
     for item in menu:
         name = get_val(item, "name")
         price = get_val(item, "price_rub")
@@ -185,7 +184,7 @@ def normalize_rating(rating, min_rating=0, max_rating=10):
 
 def train_popularity_network():
     # данные для обучения: цена, рейтинг, популярность
-    # логика такая: дешевое + высокий рейтинг = хит
+    # логика: дешевое + высокий рейтинг = хит
     popularity_data = [
         (0.1, 0.9, 0.93), (0.2, 0.8, 0.87), (0.3, 0.7, 0.71),
         (0.5, 0.5, 0.5), (0.7, 0.3, 0.28), (0.85, 0.2, 0.13),
@@ -222,7 +221,7 @@ def get_popularity_label(rating, popularity_score):
         return "Редко"
 
 
-# --- Переменные ---
+# Переменные
 ingridients = {
     "wrapper": {
         "Нори": 5,
@@ -254,12 +253,11 @@ menu_18 = [
      "price_rub": 1800.0}
 ]
 
-# что люди обычно докидывают в корзину (типа "другие посетители тоже купили")
-# в "филадельфи" опечатка - не сработает на "филадельфия", но ладно
+# что люди обычно докидывают в корзину
 combo_rules = {
     "фри": ["Соус Сырный", "Кетчуп", "Соус Барбекю"],
     "наггетсы": ["Соус Сырный", "Кетчуп", "Соус Барбекю"],
-    "палочки": ["Соус Сырный", "Кетчуп"],  # забыл барбекю добавить
+    "палочки": ["Соус Сырный", "Кетчуп"],
     "шарики": ["Соус Сырный", "Кетчуп", "Соус Барбекю"],
     "филадельфи": ["Имбирь", "Васаби", "Соус Соевый"],  # опечатка, не сработает на "филадельфия"
     "том-ям": ["Добрый Кола 300мл", "Чай Rich зеленый"],
@@ -277,7 +275,7 @@ def get_recommendations(cart, menu):
             if keyword in cart_name:
                 for sugg in suggestions:
                     suggested_names.add(sugg)
-    # если закуски есть, а пить нечего - предложим колу
+    # если закуски есть и пить нечего - предложим колу
     has_snack = any("закуск" in str(get_val(item, "category")).lower() for item in cart)
     has_drink = any("напитк" in str(get_val(item, "category")).lower() for item in cart)
     if has_snack and not has_drink:
@@ -291,7 +289,7 @@ def get_recommendations(cart, menu):
     return recommendations[0:3]
 
 
-# --- Декораторы ---
+# Декораторы
 def require_working_hours(func):
     def wrapper(*args, **kwargs):
         current_hour = int(str(datetime.now()).split(" ")[1].split(":")[0])
@@ -304,7 +302,7 @@ def require_working_hours(func):
     return wrapper
 
 
-# --- Утилиты ---
+# Утилиты
 def shitaem_total_recursive(cart, index=0):
     if index == len(cart):
         return 0
@@ -656,7 +654,7 @@ def open_menu_standart(menu, cart, age, balance, bonus):
 
     selected_category = categories[selection_index - 1]
 
-    # хиты отсюда фильтруем, они только в разделе ХИТЫ
+    # хиты отсюда фильтруются и попадают в раздел ХИТЫ
     filtered_rolls = []
     for item in menu:
         cat = get_val(item, "category")
@@ -775,7 +773,7 @@ def open_menu(menu, cart, age, balance, bonus):
             tools.fade_print("✕ Некорректный выбор. Попробуйте ещё раз.", white_tag=True, time_show=1.5, color="ff0000")
 
 
-# --- Корзина и оплата ---
+# Корзина и оплата
 def pay_card(cart, final_price, balance):
     asyncio.run(process_order())
     print("\n" * 1)
@@ -886,19 +884,20 @@ def open_cart(menu, cart, age, balance, bonus):
 
     if payment_choice == 1:
         pay_card(cart, final_price, balance)
+        cart.clear()
     elif payment_choice == 2:
         pay_cash(cart, final_price, balance)
+        cart.clear()
     elif payment_choice == 3:
         new_balance = pay_wallet(cart, final_price, balance)
         if new_balance != balance:
-            i = []
-            cart = i
+            cart.clear()
             return main_menu(menu, cart, age, new_balance, bonus)
 
     return main_menu(menu, cart, age, balance, bonus)
 
 
-# --- Основное меню ---
+# Основное меню
 def main_menu(menu, cart, age, balance, bonus):
     print("\n" * 5)
     tools.fade_print("⇌ Главное меню", white_tag=True, time_show=0.01, color="ffffff")
