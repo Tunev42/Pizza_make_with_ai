@@ -29,7 +29,7 @@ def get_val(item, k):
             return v
     return None
 
-class PopularityNetwork:
+class XORNetwork:
     def __init__(self):
         self.lr_speed = 0.17
         random.seed(int(time.time()))
@@ -96,7 +96,7 @@ class PopularityNetwork:
         self.b2 += self.lr_speed * h2_delta
 
 
-net = PopularityNetwork()
+net = XORNetwork()
 
 # кэш рейтингов, чтобы не парсить гугл каждый раз
 ratings_cache = {}
