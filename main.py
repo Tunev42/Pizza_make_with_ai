@@ -255,39 +255,59 @@ menu_18 = [
 
 # что люди обычно докидывают в корзину
 combo_rules = {
-    "фри": ["Соус Сырный", "Кетчуп", "Соус Барбекю"],
-    "наггетсы": ["Соус Сырный", "Кетчуп", "Соус Барбекю"],
-    "палочки": ["Соус Сырный", "Кетчуп"],
-    "шарики": ["Соус Сырный", "Кетчуп", "Соус Барбекю"],
-    "филадельфи": ["Имбирь", "Васаби", "Соус Соевый"],  # опечатка, не сработает на "филадельфия"
-    "том-ям": ["Добрый Кола 300мл", "Чай Rich зеленый"],
-    "пицца": ["Добрый Лимон-лайм 300мл", "Добрый Кола 300мл", "Чизкейк Нью-Йорк"],
-    "поке": ["Добрый Кола 300мл", "Чай Rich зеленый"]
+    "фри": ["Соус Сырный", "Кетчуп", "Соус Барбекю", "Добрый Кола 300мл", "Чай Rich зеленый", "Добрый Лимон-лайм 300мл"],
+    "наггетсы": ["Соус Сырный", "Кетчуп", "Соус Барбекю", "Добрый Кола 300мл", "Чай Rich зеленый", "Добрый Лимон-лайм 300мл"],
+    "палочки": ["Соус Сырный", "Кетчуп", "Добрый Кола 300мл", "Чай Rich зеленый", "Добрый Лимон-лайм 300мл"],
+    "шарики": ["Соус Сырный", "Кетчуп", "Соус Барбекю", "Добрый Кола 300мл", "Чай Rich зеленый", "Добрый Лимон-лайм 300мл"],
+    "креветка темпура": ["Соус Сырный", "Соус Спайси", "Соус медовый чили", "Добрый Кола 300мл", "Чай Rich зеленый", "Добрый Лимон-лайм 300мл"],
+    "филадельфи": ["Имбирь", "Васаби", "Соус Соевый", "Палочки Бамбуковые", "Добрый Кола 300мл", "Чай Rich зеленый", "Добрый Лимон-лайм 300мл"],
+    "ролл": ["Имбирь", "Васаби", "Соус Соевый", "Палочки Бамбуковые", "Соус Унаги", "Соус Спайси", "Добрый Кола 300мл", "Чай Rich зеленый"],
+    "маки": ["Имбирь", "Васаби", "Соус Соевый", "Палочки Бамбуковые", "Добрый Кола 300мл", "Чай Rich зеленый"],
+    "моана": ["Имбирь", "Васаби", "Соус Соевый", "Палочки Бамбуковые", "Добрый Кола 300мл", "Чай Rich зеленый"],
+    "эби блэк": ["Имбирь", "Васаби", "Соус Соевый", "Палочки Бамбуковые", "Добрый Кола 300мл", "Чай Rich зеленый"],
+    "суши": ["Имбирь", "Васаби", "Соус Соевый", "Палочки Бамбуковые", "Добрый Кола 300мл", "Чай Rich зеленый"],
+    "сет": ["Имбирь", "Васаби", "Соус Соевый", "Палочки Бамбуковые", "Чизкейк Нью-Йорк", "Чизкейк Шоколадный", "Добрый Кола 300мл", "Чай Rich зеленый"],
+    "сэндвич": ["Соус Спайси", "Соус Тартар", "Добрый Кола 300мл", "Чай Rich зеленый", "Добрый Лимон-лайм 300мл"],
+    "том-ям": ["Добрый Кола 300мл", "Чай Rich зеленый", "Добрый Лимон-лайм 300мл", "Сок Rich яблочный 200мл", "Сок Rich апельсиновый 200мл"],
+    "том-кха": ["Добрый Кола 300мл", "Чай Rich зеленый", "Добрый Лимон-лайм 300мл", "Сок Rich яблочный 200мл", "Сок Rich апельсиновый 200мл"],
+    "вок": ["Палочки Бамбуковые", "Соус медовый чили", "Добрый Кола 300мл", "Чай Rich зеленый", "Добрый Лимон-лайм 300мл"],
+    "пицца": ["Соус Сырный", "Соус Барбекю", "Кетчуп", "Добрый Кола 300мл", "Чай Rich зеленый", "Добрый Лимон-лайм 300мл"],
+    "поке": ["Соус Ореховый", "Соус Унаги", "Палочки Бамбуковые", "Добрый Кола 300мл", "Чай Rich зеленый", "Добрый Лимон-лайм 300мл"],
+    "чизкейк": ["Чай Rich зеленый", "Сок Rich яблочный 200мл", "Сок Rich апельсиновый 200мл", "Добрый Кола 300мл"]
 }
 
 
 def get_recommendations(cart, menu):
     recommendations = []
-    cart_names_lower = [str(get_val(item, "name")).strip().lower() for item in cart]
     suggested_names = set()
-    for cart_name in cart_names_lower:
-        for keyword, suggestions in combo_rules.items():
-            if keyword in cart_name:
-                for sugg in suggestions:
-                    suggested_names.add(sugg)
-    # если закуски есть и пить нечего - предложим колу
-    has_snack = any("закуск" in str(get_val(item, "category")).lower() for item in cart)
-    has_drink = any("напитк" in str(get_val(item, "category")).lower() for item in cart)
-    if has_snack and not has_drink:
-        suggested_names.add("Добрый Кола 300мл")
-    for item in menu:
-        item_name = str(get_val(item, "name")).strip()
-        if item_name in suggested_names:
-            already_in_cart = any(str(get_val(c, "name")).strip() == item_name for c in cart)
-            if not already_in_cart:
-                recommendations.append(item)
-    return recommendations[0:3]
 
+    for item in cart:
+        cart_name = str(get_val(item, "name")).strip().lower()
+        cart_cat = str(get_val(item, "category")).strip().lower()
+
+        for keyword, suggestions in combo_rules.items():
+            if keyword in cart_name or keyword in cart_cat:
+                for sugg in suggestions:
+                    suggested_names.add(sugg.strip().lower())
+
+    # если ничего не подошло по ключевым словам (например, кастомный ролл) — даем базовый набор
+    if not suggested_names:
+        for default_item in ["Имбирь", "Васаби", "Соус Соевый", "Палочки Бамбуковые", "Добрый Кола 300мл", "Чай Rich зеленый"]:
+            suggested_names.add(default_item.lower())
+
+    cart_names_set = {str(get_val(c, "name")).strip().lower() for c in cart}
+    added_recs_set = set()
+
+    for item in menu:
+        item_name_clean = str(get_val(item, "name")).strip()
+        item_name_lower = item_name_clean.lower()
+
+        if item_name_lower in suggested_names:
+            if item_name_lower not in cart_names_set and item_name_lower not in added_recs_set:
+                recommendations.append(item)
+                added_recs_set.add(item_name_lower)
+
+    return recommendations
 
 # Декораторы
 def require_working_hours(func):
@@ -923,15 +943,15 @@ def open_cash(menu, cart, age, balance, bonus):
     tools.fade_print(f"| Бонусов: {bonus}", white_tag=True, time_show=0.01, color="b5b5b5")
     tools.fade_print(f"| 1. Назад", white_tag=True, time_show=0.01, color="b5b5b5")
     tools.fade_print(f"| 2. Пополнить счёт", white_tag=True, time_show=0.01, color='b5b5b5')
-    x = input()
-
     while True:
-        if x == '1':
+        x = int(input())
+        if x == 1:
             return main_menu(menu, cart, age, balance, bonus)
-        elif x == '2':
+        elif x == 2:
             return add_value(menu, cart, age, balance, bonus)
         else:
             print("Введите '1' или '2'")
+            continue
 
 
 def add_value(menu, cart, age, balance, bonus):
